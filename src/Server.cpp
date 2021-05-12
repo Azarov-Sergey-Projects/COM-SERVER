@@ -50,7 +50,7 @@ STDAPI DllCanUnloadNow()
 STDAPI DllRegisterServer()
 {
     return RegisterServer(g_hModule, 
-                          IID_ISystemInfo,
+                          CLSID_SystemInfo,
                            friendlyName,
                            noVerProgId,
                           progId) ;
@@ -58,7 +58,7 @@ STDAPI DllRegisterServer()
 
 STDAPI DllUnregisterServer()
 {
-    return UnregisterServer(IID_ISystemInfo,
+    return UnregisterServer(CLSID_SystemInfo,
                             noVerProgId,
                              progId) ;
 }

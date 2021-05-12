@@ -38,8 +38,8 @@ HRESULT RegisterServer(HMODULE hModule,            // DLL module handle
 
     // Build the key CLSID\\{...}
     wchar_t szKey[64] ;
-    lstrcpy( szKey, TEXT( "Wow6432Node\\" ) );
-    lstrcat( szKey, TEXT( "CLSID\\" ) );
+    //lstrcpy( szKey, TEXT( "WOW6432Node\\" ) );
+    lstrcpy( szKey, TEXT( "CLSID\\" ) );
     lstrcatW(szKey, szCLSID) ;
 
     // Add the CLSID to the registry.
@@ -80,7 +80,8 @@ LONG UnregisterServer(const CLSID& clsid,         // Class ID
 
     // Build the key CLSID\\{...}
     wchar_t szKey[64] ;
-    lstrcpy(szKey, TEXT("Wow6432Node\\CLSID\\")) ;
+    //lstrcpy(szKey, TEXT("WOW6432Node\\CLSID\\")) ;
+    lstrcpy(szKey, TEXT("CLSID\\")) ;
     lstrcatW(szKey, szCLSID) ;
 
     // Delete the CLSID Key - CLSID\{...}

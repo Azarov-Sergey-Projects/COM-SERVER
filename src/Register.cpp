@@ -2,7 +2,7 @@
 #include <assert.h>
 
 #include "Register.h"
-
+#include "CSystemInfo.h"
 BOOL setKeyAndValue(const wchar_t* pszPath,
                      const wchar_t* szSubkey,
                      const wchar_t* szValue) ;
@@ -27,18 +27,20 @@ HRESULT RegisterServer(HMODULE hModule,            // DLL module handle
  
     wchar_t szModule[512] ;
     DWORD dwResult =
-        ::GetModuleFileName(hModule, 
+        ::GetModuleFileNameW(hModule, 
                              szModule,
-                             sizeof(szModule)/sizeof(char)) ;
+                             sizeof(szModule)/sizeof(wchar_t)) ;
     assert(dwResult != 0) ;
 
     // Convert the CLSID into a char.
-    wchar_t szCLSID[CLSID_STRING_SIZE] ;
-    CLSIDtochar(clsid, szCLSID, sizeof(szCLSID)) ;
-
+    wchar_t* szCLSID=new wchar_t[512] ;
+    //CLSIDtochar(clsid, szCLSID, sizeof(szCLSID)) ;
+    HRESULT hr;
+    hr = StringFromCLSID( CLSID_SystemInfo, &szCLSID );
+    assert( SUCCEEDED( hr ) );
     // Build the key CLSID\\{...}
     wchar_t szKey[64] ;
-    //lstrcpy( szKey, TEXT( "WOW6432Node\\" ) );
+    lstrcpy( szKey, TEXT( "WOW6432Node\\" ) );
     lstrcpy( szKey, TEXT( "CLSID\\" ) );
     lstrcatW(szKey, szCLSID) ;
 
@@ -114,14 +116,13 @@ void CLSIDtochar(const CLSID& clsid,
 {
     assert(length >= CLSID_STRING_SIZE) ;
     // Get CLSID
-    LPOLESTR wszCLSID = NULL ;
-    HRESULT hr = StringFromCLSID(clsid, &wszCLSID) ;
+    //LPOLESTR wszCLSID = NULL ;
+    HRESULT hr = StringFromCLSID(clsid, &szCLSID) ;
     assert(SUCCEEDED(hr)) ;
-    size_t i;
     // Covert from wide characters to non-wide.
-    wcstombs(reinterpret_cast<char*>(szCLSID), wszCLSID, length) ;
+    //wcstombs(reinterpret_cast<char*>(szCLSID), wszCLSID, length) ;
     // Free memory.
-    CoTaskMemFree(wszCLSID) ;
+    //CoTaskMemFree(wszCLSID) ;
 }
 
 //

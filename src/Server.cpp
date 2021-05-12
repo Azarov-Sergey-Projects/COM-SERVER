@@ -6,10 +6,12 @@
 long    g_lObjs = 0;
 long    g_lLocks = 0;
 extern const IID IID_ISystemInfo;
+//const GUID IID_ISystemInfo = { 0x32bb8320, 0xb41b, 0x11cf, 0xa6, 0xbb, 0x0, 0x80, 0xc7, 0xb2, 0xd6, 0x82 };
+
 HMODULE g_hModule=NULL;
-CString friendlyName = TEXT( "Server.Inproc.1" );
-CString progId = TEXT( "Server.Inproc.1" );
-CString noVerProgId = TEXT( "ServerCOM.1" );
+static CString friendlyName = TEXT( "Server.Friend.1" );
+static CString progId = TEXT( "Server.Inproc.1" );
+static CString noVerProgId = TEXT( "ServerCOM.1" );
 
 
 STDAPI DllGetClassObject( REFCLSID rclsid, REFIID riid, void** ppv )
@@ -45,7 +47,6 @@ STDAPI DllCanUnloadNow()
         return( S_OK );
 }
 
-
 STDAPI DllRegisterServer()
 {
     return RegisterServer(g_hModule, 
@@ -61,3 +62,24 @@ STDAPI DllUnregisterServer()
                             noVerProgId,
                              progId) ;
 }
+
+
+BOOL APIENTRY DllMain( HMODULE hModule,
+                       DWORD  ul_reason_for_call,
+                       LPVOID lpReserved)
+{
+    /*  switch (ul_reason_for_call)
+    {
+    case DLL_PROCESS_ATTACH:
+    case DLL_THREAD_ATTACH:
+    case DLL_THREAD_DETACH:
+    case DLL_PROCESS_DETACH:
+    break;
+    }*/
+    if( ul_reason_for_call == DLL_PROCESS_ATTACH )
+    {
+        g_hModule = hModule;
+    }
+    return TRUE;
+}
+

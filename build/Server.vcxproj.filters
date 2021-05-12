@@ -35,11 +35,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\src\Server.def">
-      <Filter>Header Files</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="..\src\CSystemInfo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -58,5 +53,10 @@
     <ClCompile Include="..\src\Server.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Server.def">
+      <Filter>Header Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

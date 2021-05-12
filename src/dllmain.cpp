@@ -1,25 +1,27 @@
 // dllmain.cpp : Defines the entry point for the DLL application.
+#include <iostream>
+#include <objbase.h>
 #include "pch.h"
 #include "CSystemInfo.h"
 
 
-BOOL APIENTRY DllMain( HMODULE hModule,
+
+/*BOOL APIENTRY DllMain( HMODULE hModule,
                        DWORD  ul_reason_for_call,
-                       LPVOID lpReserved
-                     )
+                       LPVOID lpReserved)
 {
-  /*  switch (ul_reason_for_call)
+     switch (ul_reason_for_call)
     {
     case DLL_PROCESS_ATTACH:
     case DLL_THREAD_ATTACH:
     case DLL_THREAD_DETACH:
     case DLL_PROCESS_DETACH:
         break;
-    }*/
+    }
     if( ul_reason_for_call == DLL_PROCESS_ATTACH )
     {
         g_hModule = hModule;
     }
     return TRUE;
-}
+}*/
 

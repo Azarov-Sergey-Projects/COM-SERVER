@@ -27,15 +27,15 @@
     <ClInclude Include="..\src\Register.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\src\Server.def" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="..\src\CSystemInfo.cpp" />
     <ClCompile Include="..\src\CSystemInfoFactory.cpp" />
     <ClCompile Include="..\src\dllmain.cpp" />
     <ClCompile Include="..\src\pch.cpp" />
     <ClCompile Include="..\src\Register.cpp" />
     <ClCompile Include="..\src\Server.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Server.def" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

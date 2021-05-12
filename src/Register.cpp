@@ -38,7 +38,7 @@ HRESULT RegisterServer(HMODULE hModule,            // DLL module handle
 
     // Build the key CLSID\\{...}
     wchar_t szKey[64] ;
-    lstrcpyW( szKey, TEXT( "Wow6432Node" ) );
+    lstrcpy( szKey, TEXT( "Wow6432Node\\" ) );
     lstrcat( szKey, TEXT( "CLSID\\" ) );
     lstrcatW(szKey, szCLSID) ;
 

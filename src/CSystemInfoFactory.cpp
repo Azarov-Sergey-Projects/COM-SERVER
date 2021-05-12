@@ -45,8 +45,7 @@ STDMETHODIMP_(ULONG) CSystemInfoFactory::Release()
     return m_lRef;
 }
 
-STDMETHODIMP CSystemInfoFactory::CreateInstance
-( LPUNKNOWN pUnkOuter, REFIID riid, void** ppvObj )
+STDMETHODIMP CSystemInfoFactory::CreateInstance( LPUNKNOWN pUnkOuter, REFIID riid, void** ppvObj )
 {
     CSystemInfo*      pSystemInfo;
     HRESULT    hr;

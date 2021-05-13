@@ -22,7 +22,10 @@
     <ClInclude Include="..\src\CSystemInfo.h" />
     <ClInclude Include="..\src\CSystemInfoFactory.h" />
     <ClInclude Include="..\src\framework.h" />
-    <ClInclude Include="..\src\ISystemInfo.h" />
+    <ClInclude Include="..\src\IGetCPUInfo.h" />
+    <ClInclude Include="..\src\IGetMonitorInfo.h" />
+    <ClInclude Include="..\src\IGetOS.h" />
+    <ClInclude Include="..\src\IMotherBoard.h" />
     <ClInclude Include="..\src\pch.h" />
     <ClInclude Include="..\src\registry.h" />
   </ItemGroup>

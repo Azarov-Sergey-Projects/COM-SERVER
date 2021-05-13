@@ -2,7 +2,11 @@
 
 #include <objbase.h>
 #include <INITGUID.H>
-#include "ISystemInfo.h"
+#include "IGetCPUInfo.h"
+#include "IGetMonitorInfo.h"
+#include "IGetOS.h"
+#include "IMotherBoard.h"
+
 extern long g_lObjs;
 extern long g_lLocks;
 extern HMODULE g_hModule;
@@ -20,7 +24,7 @@ DEFINE_GUID(IID_ISystemInfo,
 {
    const IID IID_ISystemInfo = { 0x32bb8320, 0xb41b, 0x11cf,{0xa6, 0xbb, 0x0, 0x80, 0xc7, 0xb2, 0xd6, 0x82} };
 }*/
-class CSystemInfo :public ISystemInfo
+class CSystemInfo :public IMotherBoard,public ICPUInfo, public IMonitorInfo, public IOperationSystem
 {
 public:
     CSystemInfo();

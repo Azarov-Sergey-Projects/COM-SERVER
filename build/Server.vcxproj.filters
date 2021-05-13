@@ -24,13 +24,22 @@
     <ClInclude Include="..\src\framework.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\ISystemInfo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\src\registry.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\IMotherBoard.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\IGetCPUInfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\IGetMonitorInfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\IGetOS.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

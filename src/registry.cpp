@@ -1,7 +1,7 @@
 //
 // Registry.cpp
 //
-
+#include "pch.h"
 #include <objbase.h>
 #include <cassert>
 #include <tchar.h>

@@ -1,7 +1,6 @@
 #pragma once
 #include <Unknwn.h>
 #include "CSystemInfo.h"
-
 class CSystemInfoFactory :public IClassFactory
 {
 public:

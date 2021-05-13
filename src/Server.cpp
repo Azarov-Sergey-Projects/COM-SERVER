@@ -1,8 +1,10 @@
+#include "pch.h"
 #include <windows.h>
 
 #include <initguid.h>
 #include "CSystemInfoFactory.h"
 #include "registry.h"
+
 long    g_lObjs = 0;
 long    g_lLocks = 0;
 extern const IID IID_ISystemInfo;

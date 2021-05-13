@@ -6,7 +6,6 @@
 #include "IGetMonitorInfo.h"
 #include "IGetOS.h"
 #include "IMotherBoard.h"
-
 extern long g_lObjs;
 extern long g_lLocks;
 extern HMODULE g_hModule;

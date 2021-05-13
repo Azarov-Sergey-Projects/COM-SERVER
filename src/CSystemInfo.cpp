@@ -1,3 +1,4 @@
+#include "pch.h"
 #include <comdef.h>
 #include <Wbemidl.h>
 #include <dciman.h>

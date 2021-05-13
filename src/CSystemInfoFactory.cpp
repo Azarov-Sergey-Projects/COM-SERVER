@@ -14,7 +14,7 @@ CSystemInfoFactory::~CSystemInfoFactory()
 
 STDMETHODIMP CSystemInfoFactory::QueryInterface( REFIID riid, void** ppv )
 {
-    *ppv = 0;
+    *ppv = nullptr;
 
     if ( riid == IID_IUnknown || riid == IID_IClassFactory )
         *ppv = this;
@@ -50,7 +50,7 @@ STDMETHODIMP CSystemInfoFactory::CreateInstance( LPUNKNOWN pUnkOuter, REFIID rii
     CSystemInfo*      pSystemInfo;
     HRESULT    hr;
 
-    *ppvObj = 0;
+    *ppvObj = nullptr;
 
     pSystemInfo = new CSystemInfo;
 

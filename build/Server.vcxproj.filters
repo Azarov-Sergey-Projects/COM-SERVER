@@ -30,7 +30,7 @@
     <ClInclude Include="..\src\pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Register.h">
+    <ClInclude Include="..\src\registry.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -47,10 +47,10 @@
     <ClCompile Include="..\src\pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Register.cpp">
+    <ClCompile Include="..\src\Server.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Server.cpp">
+    <ClCompile Include="..\src\registry.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

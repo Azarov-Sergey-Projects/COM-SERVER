@@ -21,7 +21,7 @@ CSystemInfo::~CSystemInfo()
 
 STDMETHODIMP CSystemInfo::QueryInterface( REFIID riid, void** ppv )
 {
-    *ppv = 0;
+    *ppv = nullptr;
 
     if ( riid == IID_IUnknown || riid == IID_ISystemInfo )
         *ppv = this;
@@ -223,5 +223,6 @@ STDMETHODIMP CSystemInfo::GetInfo( CString className, CString propertyName, CStr
         VariantClear( &vtProp );
         pclsObj->Release();
     }
+    CoUninitialize();
     return S_OK;
 }

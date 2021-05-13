@@ -24,14 +24,14 @@
     <ClInclude Include="..\src\framework.h" />
     <ClInclude Include="..\src\ISystemInfo.h" />
     <ClInclude Include="..\src\pch.h" />
-    <ClInclude Include="..\src\Register.h" />
+    <ClInclude Include="..\src\registry.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\CSystemInfo.cpp" />
     <ClCompile Include="..\src\CSystemInfoFactory.cpp" />
     <ClCompile Include="..\src\dllmain.cpp" />
     <ClCompile Include="..\src\pch.cpp" />
-    <ClCompile Include="..\src\Register.cpp" />
+    <ClCompile Include="..\src\registry.cpp" />
     <ClCompile Include="..\src\Server.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -54,13 +54,11 @@ STDMETHODIMP_(ULONG) CSystemInfo::Release()
 STDMETHODIMP CSystemInfo::GetOS(CString* SystemInfo )
 {
     HRESULT hres;
-    CString tmp;
-    hres = GetInfo( TEXT( "Win32_OperatingSystem" ), TEXT( "Description" ), &tmp );
+    hres = GetInfo( TEXT( "Win32_OperatingSystem" ), TEXT( "Description" ), SystemInfo );
     if( FAILED( hres ) )
     {
         return E_FAIL;
     }
-    SystemInfo->SetString( tmp.GetString() );
     return S_OK;
 }
 
@@ -79,38 +77,27 @@ STDMETHODIMP CSystemInfo::GetMBoardCreator( CString* info )
 STDMETHODIMP CSystemInfo::GetCPUINFO( UINT* clocks,UINT *frequency )
 {
     HRESULT hres;
-    UINT clockCount;
-    UINT frequencyHZ;
-    CString tmp;
-    CString tmp1;
-    hres = GetInfoUINT( TEXT( "Win32_Processor" ), TEXT( "NumberOfCores" ), &clockCount );
+    hres = GetInfoUINT( TEXT( "Win32_Processor" ), TEXT( "NumberOfCores" ), clocks );
     if( FAILED( hres ) )
     {
         return E_FAIL;
     }
-    *clocks = clockCount;
-    hres = GetInfoUINT( TEXT( "Win32_Processor" ), TEXT( "MaxClockSpeed" ), &frequencyHZ );
+    hres = GetInfoUINT( TEXT( "Win32_Processor" ), TEXT( "MaxClockSpeed" ), frequency );
     if( FAILED( hres ) )
     {
         return E_FAIL;
     }
-    *frequency = frequencyHZ;
     return S_OK;
 }
 
 STDMETHODIMP_(long) CSystemInfo::MonitorInfo( CString* info )
 {
-    CString tmp;
-
     HRESULT hres;
-
-    CString tmp1;
-    hres = GetInfo( TEXT( "Win32_DesktopMonitor" ), TEXT( "MonitorManufacturer" ), &tmp );
+    hres = GetInfo( TEXT( "Win32_DesktopMonitor" ), TEXT( "MonitorManufacturer" ), info );
     if( FAILED( hres ) )
     {
         return E_FAIL;
     }
-    info->SetString( tmp);
     return S_OK;
 }
 
@@ -336,7 +323,7 @@ STDMETHODIMP CSystemInfo::GetInfoUINT( CString className, CString propertyName, 
         {
             return E_FAIL;
         }
-        *info = vtProp.intVal;//SetString( vtProp.bstrVal );
+        *info = vtProp.uintVal;
         VariantClear( &vtProp );
         pclsObj->Release();
     }

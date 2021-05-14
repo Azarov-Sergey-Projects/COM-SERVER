@@ -34,9 +34,10 @@ public:
 
     STDMETHOD( GetOS( CString* info ) );
     STDMETHOD( GetMBoardCreator(CString* info) );
-    STDMETHOD( GetCPUINFO(CString* info) );
+    STDMETHOD( GetCPUINFO(UINT* clocks,UINT *frequency) );
     STDMETHOD( MonitorInfo(CString* info) );
 private:
     long m_lRef;
     STDMETHODIMP GetInfo( CString className,CString propertyName,CString*info );
+    STDMETHODIMP GetInfoUINT( CString className, CString propertyName, UINT* info );
 };

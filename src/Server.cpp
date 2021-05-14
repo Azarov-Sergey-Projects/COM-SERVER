@@ -10,9 +10,9 @@ long    g_lLocks = 0;
 extern const IID IID_ISystemInfo;
 
 HMODULE g_hModule=NULL;
-static CString friendlyName = TEXT( "Server.Friend.1" );
-static CString progId = TEXT( "Server.Inproc.1" );
-static CString noVerProgId = TEXT( "ServerCOM.1" );
+ CString friendlyName = TEXT( "Server.Friend.1" );
+ CString progId = TEXT( "Server.Inproc.1" );
+ CString noVerProgId = TEXT( "ServerCOM.1" );
 
 
 STDAPI DllGetClassObject( REFCLSID rclsid, REFIID riid, void** ppv )
@@ -20,9 +20,9 @@ STDAPI DllGetClassObject( REFCLSID rclsid, REFIID riid, void** ppv )
     HRESULT             hr;
     CSystemInfoFactory    *pCF;
 
-    pCF = 0;
+    pCF = nullptr;
 
-    if ( rclsid != IID_ISystemInfo )
+    if ( rclsid != CLSID_SystemInfo )
         return( E_FAIL );
 
     pCF = new  CSystemInfoFactory;

@@ -4,5 +4,5 @@
 class ICPUInfo: public IUnknown
 {
 public:
-    STDMETHOD( GetCPUINFO(CString* ) ) PURE;
+    STDMETHOD( GetCPUINFO(UINT* clocks,UINT *frequency ) ) PURE;
 };

@@ -3,6 +3,7 @@
 #include <objbase.h>
 #include <INITGUID.H>
 #include <iostream>
+#include <vector>
 #include "IGetCPUInfo.h"
 #include "IGetMonitorInfo.h"
 #include "IGetOS.h"
@@ -36,9 +37,10 @@ public:
     STDMETHOD( GetOS( CString* info ) );
     STDMETHOD( GetMBoardCreator(CString* info) );
     STDMETHOD( GetCPUINFO(UINT* clocks,UINT *frequency) );
-    STDMETHOD( MonitorInfo(CString* info,int *) );
+    STDMETHOD( MonitorInfo( CString* info, int*, std::vector<uint32_t>*resolutionX, std::vector<uint32_t>*ResY ) );
 private:
     long m_lRef;
     STDMETHODIMP GetInfo( CString className,CString propertyName,CString*info );
     STDMETHODIMP GetInfoUINT( CString className, CString propertyName, uint32_t* info );
+    STDMETHODIMP GetResolution( CString className, CString propertyName, std::vector<uint32_t>*info );
 };

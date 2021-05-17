@@ -4,5 +4,5 @@
 class IMonitorInfo: public IUnknown
 {
 public:
-    STDMETHOD( MonitorInfo(CString* ) )PURE;
+    STDMETHOD( MonitorInfo(CString*,int * ) )PURE;
 };

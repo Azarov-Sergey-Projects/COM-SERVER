@@ -1,7 +1,6 @@
 #include "pch.h"
 #include <comdef.h>
 #include <Wbemidl.h>
-#include <iostream>
 #include <dciman.h>
 #include "CSystemInfo.h"
 #pragma comment(lib, "wbemuuid.lib")
@@ -54,7 +53,7 @@ STDMETHODIMP_(ULONG) CSystemInfo::Release()
 STDMETHODIMP CSystemInfo::GetOS(CString* SystemInfo )
 {
     HRESULT hres;
-    hres = GetInfo( TEXT( "Win32_OperatingSystem" ), TEXT( "Description" ), SystemInfo );
+    hres = GetInfo( TEXT( "Win32_OperatingSystem" ), TEXT( "Version" ), SystemInfo );
     if( FAILED( hres ) )
     {
         return E_FAIL;
@@ -90,10 +89,19 @@ STDMETHODIMP CSystemInfo::GetCPUINFO( UINT* clocks,UINT *frequency )
     return S_OK;
 }
 
-STDMETHODIMP_(long) CSystemInfo::MonitorInfo( CString* info )
+STDMETHODIMP_(long) CSystemInfo::MonitorInfo( CString* info, int* MonitorCount )
 {
     HRESULT hres;
-    hres = GetInfo( TEXT( "Win32_DesktopMonitor" ), TEXT( "MonitorManufacturer" ), info );
+    *MonitorCount = GetSystemMetrics( SM_CMONITORS );
+    if( *MonitorCount != 0 )
+    {
+        hres = GetInfo( TEXT( "Win32_DesktopMonitor" ), TEXT( "DeviceID" ), info );
+    }
+    else
+    {
+        info->SetString( TEXT( "There is no monitors connected to your PC" ) );
+        hres = E_FAIL;
+    }
     if( FAILED( hres ) )
     {
         return E_FAIL;
@@ -132,10 +140,10 @@ STDMETHODIMP CSystemInfo::GetInfo( CString className, CString propertyName, CStr
     }
 
     hres = CoCreateInstance(
-        CLSID_WbemLocator,
+        CLSID_WbemAdministrativeLocator,
         0,
         CLSCTX_INPROC_SERVER,
-        IID_IWbemLocator, ( LPVOID* )&pLoc );
+        IID_IWbemLocator, reinterpret_cast< LPVOID* >(&pLoc) );
 
     if( FAILED( hres ) )
     {
@@ -175,7 +183,7 @@ STDMETHODIMP CSystemInfo::GetInfo( CString className, CString propertyName, CStr
     }
 
 
-    CString tmp = TEXT( "SELECT * FROM ");
+    CString tmp = TEXT( "SELECT * FROM  ");
     tmp += className.GetString();
     hres = pSvc->ExecQuery(
         bstr_t( "WQL" ),
@@ -212,6 +220,9 @@ STDMETHODIMP CSystemInfo::GetInfo( CString className, CString propertyName, CStr
         VariantClear( &vtProp );
         pclsObj->Release();
     }
+    pSvc->Release();
+    pLoc->Release();
+    pEnumerator->Release();
     CoUninitialize();
     return S_OK;
 }
@@ -330,3 +341,4 @@ STDMETHODIMP CSystemInfo::GetInfoUINT( CString className, CString propertyName, 
     CoUninitialize();
     return S_OK;
 }
+

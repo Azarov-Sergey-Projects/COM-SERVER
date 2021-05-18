@@ -94,7 +94,7 @@ STDMETHODIMP CSystemInfo::MonitorInfo( CString* info, int* MonitorCount, std::ve
 {
     HRESULT hres;
     *MonitorCount = GetSystemMetrics( SM_CMONITORS );
-    if( *MonitorCount != 0 )
+    /*if( *MonitorCount != 0 )
     {
         hres = GetInfo( TEXT( "Win32_DesktopMonitor" ), TEXT( "DeviceID" ), info );
     }
@@ -116,8 +116,30 @@ STDMETHODIMP CSystemInfo::MonitorInfo( CString* info, int* MonitorCount, std::ve
     if( FAILED( hres ) )
     {
         return E_FAIL;
+    }*/
+    DWORD i = 0;
+    DWORD j;
+    DISPLAY_DEVICE dc;
+
+    dc.cb = sizeof(dc);
+
+    while(EnumDisplayDevices(NULL, i, &dc, EDD_GET_DEVICE_INTERFACE_NAME) != 0)
+    {
+        if ((dc.StateFlags & DISPLAY_DEVICE_ACTIVE) && !(dc.StateFlags & DISPLAY_DEVICE_MIRRORING_DRIVER))
+        {
+            DEVMODE dm;
+
+            j = 0;
+            while(EnumDisplaySettings(dc.DeviceName, j, &dm) != 0)
+            {
+                ++j;
+            }
+            *info += dm.dmDeviceName;
+            ResolutionX->push_back( dm.dmPelsHeight );
+            ResolutionY->push_back( dm.dmPelsWidth );
+        }
+        ++i;
     }
-    (*MonitorCount)++;
     return S_OK;
 }
 

@@ -25,22 +25,22 @@ DEFINE_GUID(IID_ISystemInfo,
 {
    const IID IID_ISystemInfo = { 0x32bb8320, 0xb41b, 0x11cf,{0xa6, 0xbb, 0x0, 0x80, 0xc7, 0xb2, 0xd6, 0x82} };
 }*/
-class CSystemInfo :public IMotherBoard,public ICPUInfo, public IMonitorInfo, public IOperationSystem
+class SystemInfo :public IMotherBoard,public ICPUInfo, public IMonitorInfo, public IOperationSystem
 {
 public:
-    CSystemInfo();
-    ~CSystemInfo();
+    SystemInfo();
+    ~SystemInfo();
     STDMETHOD( QueryInterface( REFIID, void** ) );
     STDMETHOD_( ULONG, AddRef() );
     STDMETHOD_( ULONG, Release() );
 
-    STDMETHOD( GetOS( CString* info ) );
-    STDMETHOD( GetMBoardCreator(CString* info) );
-    STDMETHOD( GetCPUINFO(UINT* clocks,UINT *frequency) );
-    STDMETHOD( MonitorInfo( CString* info, int*, std::vector<uint32_t>*resolutionX, std::vector<uint32_t>*ResY ) );
+    STDMETHOD( getOS( CString* info ) );
+    STDMETHOD( getMBoardCreator(CString* info) );
+    STDMETHOD( getCPUINFO(UINT* clocks,UINT *frequency) );
+    STDMETHOD( monitorInfo( CString* info, int*, std::vector<uint32_t>*resolutionX, std::vector<uint32_t>*ResY ) );
 private:
     long m_lRef;
-    STDMETHODIMP GetInfo( CString className,CString propertyName,CString*info );
-    STDMETHODIMP GetInfoUINT( CString className, CString propertyName, uint32_t* info );
-    STDMETHODIMP GetResolution( CString className, CString propertyName, std::vector<uint32_t>*info );
+    STDMETHODIMP getInfo( CString className,CString propertyName,CString*info );
+    STDMETHODIMP getInfoUINT( CString className, CString propertyName, uint32_t* info );
+    STDMETHODIMP getResolution( CString className, CString propertyName, std::vector<uint32_t>*info );
 };

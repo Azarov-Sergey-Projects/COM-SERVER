@@ -16,7 +16,7 @@ BOOL setKeyAndValue( const TCHAR* pszPath,
                      const TCHAR* szValue );
 
 // Convert a CLSID into a TCHAR string.
-void CLSIDtotchar( const CLSID& clsid,
+void ÒLSIDtotchar( const CLSID& clsid,
                   TCHAR* szCLSID,
                   int length );
 
@@ -55,7 +55,7 @@ HRESULT RegisterServer( HMODULE hModule,            // DLL module handle
 
    // Convert the CLSID into a TCHAR.
    TCHAR szCLSID[CLSID_STRING_SIZE];
-   CLSIDtotchar( clsid, szCLSID, sizeof( szCLSID ) );
+   ÒLSIDtotchar( clsid, szCLSID, sizeof( szCLSID ) );
 
    // Build the key CLSID\\{...}
    TCHAR szKey[64];
@@ -96,7 +96,7 @@ LONG UnregisterServer( const CLSID& clsid,         // Class ID
 {
    // Convert the CLSID into a TCHAR.
    TCHAR szCLSID[CLSID_STRING_SIZE];
-   CLSIDtotchar( clsid, szCLSID, sizeof( szCLSID ) );
+   ÒLSIDtotchar( clsid, szCLSID, sizeof( szCLSID ) );
 
    // Build the key CLSID\\{...}
    TCHAR szKey[64];
@@ -127,7 +127,7 @@ LONG UnregisterServer( const CLSID& clsid,         // Class ID
 //
 
 // Convert a CLSID to a TCHAR string.
-void CLSIDtotchar( const CLSID& clsid,
+void ÒLSIDtotchar( const CLSID& clsid,
                   TCHAR* szCLSID,
                   int length )
 {

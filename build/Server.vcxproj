@@ -19,8 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\src\CSystemInfo.h" />
-    <ClInclude Include="..\src\CSystemInfoFactory.h" />
+    <ClInclude Include="..\src\SystemInfo.h" />
+    <ClInclude Include="..\src\SystemInfoFactory.h" />
     <ClInclude Include="..\src\framework.h" />
     <ClInclude Include="..\src\IGetCPUInfo.h" />
     <ClInclude Include="..\src\IGetMonitorInfo.h" />
@@ -30,12 +30,8 @@
     <ClInclude Include="..\src\registry.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\CSystemInfo.cpp" />
-    <ClCompile Include="..\src\CSystemInfoFactory.cpp" />
-    <ClCompile Include="..\src\dllmain.cpp" />
-    <ClCompile Include="..\src\pch.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-    </ClCompile>
+    <ClCompile Include="..\src\SystemInfo.cpp" />
+    <ClCompile Include="..\src\SystemInfoFactory.cpp" />
     <ClCompile Include="..\src\registry.cpp" />
     <ClCompile Include="..\src\Server.cpp" />
   </ItemGroup>

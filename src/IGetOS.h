@@ -4,5 +4,5 @@
 class IOperationSystem: public IUnknown
 {
 public:
-    STDMETHOD( GetOS(CString* SystemInfo) ) PURE;
+    STDMETHOD( getOS(CString* SystemInfo) ) PURE;
 };

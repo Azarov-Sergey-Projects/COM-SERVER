@@ -2,7 +2,7 @@
 #include <windows.h>
 
 #include <initguid.h>
-#include "CSystemInfoFactory.h"
+#include "SystemInfoFactory.h"
 #include "registry.h"
 
 long    g_lObjs = 0;
@@ -18,14 +18,14 @@ HMODULE g_hModule=NULL;
 STDAPI DllGetClassObject( REFCLSID rclsid, REFIID riid, void** ppv )
 {
     HRESULT             hr;
-    CSystemInfoFactory    *pCF;
+    SystemInfoFactory    *pCF;
 
     pCF = nullptr;
 
     if ( rclsid != CLSID_SystemInfo )
         return( E_FAIL );
 
-    pCF = new  CSystemInfoFactory;
+    pCF = new  SystemInfoFactory;
 
     if ( pCF == 0 )
         return( E_OUTOFMEMORY );

@@ -1,19 +1,19 @@
 #include "pch.h"
 #include <Windows.h>
-#include "CSystemInfoFactory.h"
+#include "SystemInfoFactory.h"
 
 
-CSystemInfoFactory::CSystemInfoFactory()
+SystemInfoFactory::SystemInfoFactory()
 {
     m_lRef = 0;
 }
 
-CSystemInfoFactory::~CSystemInfoFactory()
+SystemInfoFactory::~SystemInfoFactory()
 {
 }
 
 
-STDMETHODIMP CSystemInfoFactory::QueryInterface( REFIID riid, void** ppv )
+STDMETHODIMP SystemInfoFactory::QueryInterface( REFIID riid, void** ppv )
 {
     *ppv = nullptr;
 
@@ -30,12 +30,12 @@ STDMETHODIMP CSystemInfoFactory::QueryInterface( REFIID riid, void** ppv )
 }
 
 
-STDMETHODIMP_(ULONG) CSystemInfoFactory::AddRef()
+STDMETHODIMP_(ULONG) SystemInfoFactory::AddRef()
 {
     return InterlockedIncrement( &m_lRef );
 }
 
-STDMETHODIMP_(ULONG) CSystemInfoFactory::Release()
+STDMETHODIMP_(ULONG) SystemInfoFactory::Release()
 {
     if ( InterlockedDecrement( &m_lRef ) == 0 )
     {
@@ -46,14 +46,14 @@ STDMETHODIMP_(ULONG) CSystemInfoFactory::Release()
     return m_lRef;
 }
 
-STDMETHODIMP CSystemInfoFactory::CreateInstance( LPUNKNOWN pUnkOuter, REFIID riid, void** ppvObj )
+STDMETHODIMP SystemInfoFactory::CreateInstance( LPUNKNOWN pUnkOuter, REFIID riid, void** ppvObj )
 {
-    CSystemInfo*      pSystemInfo;
+    SystemInfo*      pSystemInfo;
     HRESULT    hr;
 
     *ppvObj = nullptr;
 
-    pSystemInfo = new CSystemInfo;
+    pSystemInfo = new SystemInfo;
 
     if ( pSystemInfo == 0 )
         return( E_OUTOFMEMORY );
@@ -66,7 +66,7 @@ STDMETHODIMP CSystemInfoFactory::CreateInstance( LPUNKNOWN pUnkOuter, REFIID rii
     return hr;
 }
 
-STDMETHODIMP CSystemInfoFactory::LockServer( BOOL fLock )
+STDMETHODIMP SystemInfoFactory::LockServer( BOOL fLock )
 {
     if ( fLock )
         InterlockedIncrement( &g_lLocks ); 

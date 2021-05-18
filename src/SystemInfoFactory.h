@@ -1,11 +1,11 @@
 #pragma once
 #include <Unknwn.h>
-#include "CSystemInfo.h"
-class CSystemInfoFactory :public IClassFactory
+#include "SystemInfo.h"
+class SystemInfoFactory :public IClassFactory
 {
 public:
-    CSystemInfoFactory();
-    ~CSystemInfoFactory();
+    SystemInfoFactory();
+    ~SystemInfoFactory();
 
     STDMETHOD( QueryInterface( REFIID, void** ) );
     STDMETHOD_( ULONG, AddRef() );

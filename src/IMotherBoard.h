@@ -5,5 +5,5 @@
 class IMotherBoard: public IUnknown
 {
 public:
-    STDMETHOD( GetMBoardCreator(CString* ) )PURE;
+    STDMETHOD( getMBoardCreator(CString* ) )PURE;
 };

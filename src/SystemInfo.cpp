@@ -1,11 +1,11 @@
 #include "pch.h"
 #include <comdef.h>
 #include <Wbemidl.h>
-
 #include <dciman.h>
-#include "CSystemInfo.h"
+#include "SystemInfo.h"
 #pragma comment(lib, "wbemuuid.lib")
-CSystemInfo::CSystemInfo()
+
+SystemInfo::SystemInfo()
 {
     m_lRef = 0;
 
@@ -14,13 +14,13 @@ CSystemInfo::CSystemInfo()
 }
 
 // The destructor
-CSystemInfo::~CSystemInfo()
+SystemInfo::~SystemInfo()
 {
     // Decrement the global object count
     InterlockedDecrement( &g_lObjs ); 
 }
 
-STDMETHODIMP CSystemInfo::QueryInterface( REFIID riid, void** ppv )
+STDMETHODIMP SystemInfo::QueryInterface( REFIID riid, void** ppv )
 {
     *ppv = nullptr;
 
@@ -35,12 +35,12 @@ STDMETHODIMP CSystemInfo::QueryInterface( REFIID riid, void** ppv )
     return (E_NOINTERFACE);
 }
 
-STDMETHODIMP_(ULONG) CSystemInfo::AddRef()
+STDMETHODIMP_(ULONG) SystemInfo::AddRef()
 {
     return InterlockedIncrement( &m_lRef );
 }
 
-STDMETHODIMP_(ULONG) CSystemInfo::Release()
+STDMETHODIMP_(ULONG) SystemInfo::Release()
 {
     if ( InterlockedDecrement( &m_lRef ) == 0 )
     {
@@ -51,10 +51,10 @@ STDMETHODIMP_(ULONG) CSystemInfo::Release()
     return m_lRef;
 }
 
-STDMETHODIMP CSystemInfo::GetOS(CString* SystemInfo )
+STDMETHODIMP SystemInfo::getOS(CString* SystemInfo )
 {
     HRESULT hres;
-    hres = GetInfo( TEXT( "Win32_OperatingSystem" ), TEXT( "Version" ), SystemInfo );
+    hres = getInfo( TEXT( "Win32_OperatingSystem" ), TEXT( "Version" ), SystemInfo );
     if( FAILED( hres ) )
     {
         return E_FAIL;
@@ -62,10 +62,10 @@ STDMETHODIMP CSystemInfo::GetOS(CString* SystemInfo )
     return S_OK;
 }
 
-STDMETHODIMP CSystemInfo::GetMBoardCreator( CString* info )
+STDMETHODIMP SystemInfo::getMBoardCreator( CString* info )
 {
     HRESULT hres;
-    hres=GetInfo( TEXT( "Win32_BaseBoard" ), TEXT( "Manufacturer" ), info );
+    hres=getInfo( TEXT( "Win32_BaseBoard" ), TEXT( "Manufacturer" ), info );
     if( FAILED( hres ) )
     {
         return E_FAIL;
@@ -74,15 +74,15 @@ STDMETHODIMP CSystemInfo::GetMBoardCreator( CString* info )
 
 }
 
-STDMETHODIMP CSystemInfo::GetCPUINFO( UINT* clocks,UINT *frequency )
+STDMETHODIMP SystemInfo::getCPUINFO( UINT* clocks,UINT *frequency )
 {
     HRESULT hres;
-    hres = GetInfoUINT( TEXT( "Win32_Processor" ), TEXT( "NumberOfCores" ), clocks );
+    hres = getInfoUINT( TEXT( "Win32_Processor" ), TEXT( "NumberOfCores" ), clocks );
     if( FAILED( hres ) )
     {
         return E_FAIL;
     }
-    hres = GetInfoUINT( TEXT( "Win32_Processor" ), TEXT( "MaxClockSpeed" ), frequency );
+    hres = getInfoUINT( TEXT( "Win32_Processor" ), TEXT( "MaxClockSpeed" ), frequency );
     if( FAILED( hres ) )
     {
         return E_FAIL;
@@ -90,33 +90,10 @@ STDMETHODIMP CSystemInfo::GetCPUINFO( UINT* clocks,UINT *frequency )
     return S_OK;
 }
 
-STDMETHODIMP CSystemInfo::MonitorInfo( CString* info, int* MonitorCount, std::vector<uint32_t>* ResolutionX, std::vector<uint32_t>* ResolutionY )
+STDMETHODIMP SystemInfo::monitorInfo( CString* info, int* MonitorCount, std::vector<uint32_t>* ResolutionX, std::vector<uint32_t>* ResolutionY )
 {
     HRESULT hres;
     *MonitorCount = GetSystemMetrics( SM_CMONITORS );
-    /*if( *MonitorCount != 0 )
-    {
-        hres = GetInfo( TEXT( "Win32_DesktopMonitor" ), TEXT( "DeviceID" ), info );
-    }
-    else
-    {
-        info->SetString( TEXT( "There is no monitors connected to your PC" ) );
-        hres = E_FAIL;
-    }
-    if( FAILED( hres ) )
-    {
-        return E_FAIL;
-    }
-    hres = GetResolution( TEXT( "Win32_DesktopMonitor" ), TEXT( "ScreenHeight" ), ResolutionX );
-    if( FAILED( hres ) )
-    {
-        return E_FAIL;
-    }
-    hres = GetResolution( TEXT( "Win32_DesktopMonitor" ), TEXT( "ScreenWidth" ), ResolutionY );
-    if( FAILED( hres ) )
-    {
-        return E_FAIL;
-    }*/
     DWORD i = 0;
     DWORD j;
     DISPLAY_DEVICE dc;
@@ -134,7 +111,8 @@ STDMETHODIMP CSystemInfo::MonitorInfo( CString* info, int* MonitorCount, std::ve
             {
                 ++j;
             }
-            *info += dm.dmDeviceName;
+            *info += dc.DeviceName;
+            *info += TEXT( "\t" );
             ResolutionX->push_back( dm.dmPelsHeight );
             ResolutionY->push_back( dm.dmPelsWidth );
         }
@@ -144,7 +122,7 @@ STDMETHODIMP CSystemInfo::MonitorInfo( CString* info, int* MonitorCount, std::ve
 }
 
 
-STDMETHODIMP CSystemInfo::GetInfo( CString className, CString propertyName, CString* info )
+STDMETHODIMP SystemInfo::getInfo( CString className, CString propertyName, CString* info )
 {
     HRESULT hres;
     IWbemLocator* pLoc = NULL;
@@ -263,7 +241,7 @@ STDMETHODIMP CSystemInfo::GetInfo( CString className, CString propertyName, CStr
     return S_OK;
 }
 
-STDMETHODIMP CSystemInfo::GetInfoUINT( CString className, CString propertyName, uint32_t* info )
+STDMETHODIMP SystemInfo::getInfoUINT( CString className, CString propertyName, uint32_t* info )
 {
     HRESULT hres;
     IWbemLocator* pLoc = NULL;
@@ -378,7 +356,7 @@ STDMETHODIMP CSystemInfo::GetInfoUINT( CString className, CString propertyName, 
     return S_OK;
 }
 
-STDMETHODIMP CSystemInfo::GetResolution( CString className, CString propertyName, std::vector<uint32_t>* info )
+STDMETHODIMP SystemInfo::getResolution( CString className, CString propertyName, std::vector<uint32_t>* info )
 {
     HRESULT hres;
     IWbemLocator* pLoc = NULL;
